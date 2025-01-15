@@ -1,0 +1,35 @@
+.home {
+    height: calc(100% - 53px);
+    /* flex-shrink: 1;
+    flex-grow: 1; */
+}
+
+.tableContainer {
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    border-collapse: collapse;
+    position: relative;
+    width: 94%;
+    color: rgb(207, 207, 207);
+    margin: 50px;
+    padding: 150px;
+}
+
+.tableContainer::-webkit-scrollbar {
+    width: 0px;
+    background-color: transparent;
+}
+
+.tableContainer::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.tableContainer:hover::-webkit-scrollbar-thumb {
+    background: rgba(151, 151, 151, 0.767);
+    border-radius: 10px;
+}

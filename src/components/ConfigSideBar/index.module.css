@@ -1,0 +1,14 @@
+.ConfigSideBarMain {
+    background-color: rgba(44, 44, 44, 0.733) !important;
+    backdrop-filter: blur(6px);
+    color: white;
+    width: 300px !important;
+    padding: 20px 0px 0px 0px !important;
+}
+
+.ConfigSideBarHeader {
+    color: white;
+    padding-left: 32px;
+    font-size: 22px;
+    font-weight: 500;
+}

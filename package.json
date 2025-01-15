@@ -2,33 +2,41 @@
   "name": "solo-kds",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "homepage": "./",
-  "main": "./public/electron.js",
+  "main": "dist/electron.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && electron-builder",
+    "build": "vite build",
     "clean": "rmdir /s /q node_modules && del /f /q package-lock.json && npm cache clean --force",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "win:p": "npm run build && electron-builder -w -c.extraMetadata.main=build/electron.js --publish always",
+    "clean:dist": "rmdir /s /q dist && rmdir /s /q build && rmdir /s /q .cache",
     "start": "concurrently \"vite\" \"cross-env NODE_ENV=development electron .\"",
-    "win": "npm run build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "preview": "vite preview",
+    "win": "npm run build && electron-builder -w",
+    "win:p": "npm run build && electron-builder -w -c.extraMetadata.main=public/electron.js --publish always",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "axios": "^1.7.9",
+    "bonjour-service": "^1.3.0",
+    "bootstrap": "^5.3.3",
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
-    "electron": "^33.3.1",
-    "electron-builder": "^25.1.8",
+    "framer-motion": "^11.17.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-bootstrap": "^2.10.7",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.1",
+    "socket.io-client": "^4.8.1",
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
@@ -37,13 +45,40 @@
     "vite": "^6.0.5"
   },
   "build": {
-    "appId": "com.example.electronapp",
+    "appId": "ec.solo.kds",
+    "productName": "SOLO-KDS",
     "files": [
+      "public/**/*",
       "dist/**/*",
-      "main/**/*"
+      "localData.json",
+      "public/electron.js"
+    ],
+    "extraFiles": [
+      {
+        "from": "localData.json",
+        "to": "localData.json",
+        "filter": [
+          "**/*"
+        ]
+      }
     ],
     "directories": {
-      "buildResources": "assets"
+      "buildResources": "public"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "android-chrome-512x512.png"
+    },
+    "win": {
+      "publish": [
+        "github"
+      ],
+      "target": "nsis",
+      "icon": "android-chrome-512x512.png"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "android-chrome-512x512.png"
     }
   }
 }

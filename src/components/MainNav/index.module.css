@@ -1,0 +1,27 @@
+.mainNav {
+    flex-basis: 53px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.bars {
+    padding: 5px 10px;
+    font-size: 22px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer !important;
+}
+
+.Link:hover .LinkIcon,
+.bars:hover {
+    transform: scale(1.2);
+    color: rgba(199, 13, 13, 0.945);
+}
+
+.Link:active .LinkIcon,
+.bars:active {
+    transform: scale(1);
+    color: rgba(158, 1, 1, 0.945);
+}
