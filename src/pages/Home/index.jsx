@@ -6,15 +6,19 @@ import CategoryList from "../../components/CategoryList";
 import { Row } from "react-bootstrap";
 import axios from "axios";
 import useSocket from "../../hooks/useSocket";
+import axiosInterceptors from "../../utils/axiosInterceptors";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [data, setData] = useState(null); // Initialize with null for clarity
+  const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get(
-        "http://192.168.1.104:3001/api/v2/kds/kots/liveKot"
-      );
+      const axiosIntens = await axiosInterceptors(navigate);
+
+      const response = await axiosIntens.get("/api/v2/kds/kots/liveKot");
+      console.log("response", response);
       setData(response.data.data);
     } catch (error) {
       console.error("Error fetching live KOT data:", error);

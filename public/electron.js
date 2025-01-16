@@ -1,3 +1,4 @@
+const { default: Bonjour } = require("bonjour-service");
 const { app, BrowserWindow, ipcMain } = require("electron");
 const fs = require("fs");
 const path = require("path");
@@ -68,7 +69,18 @@ ipcMain.handle("getLocalJsonData", async () => {
     return null;
   }
 });
-
+// Expose the function to the renderer process
+ipcMain.handle("update-localjson-data", (event, data) => {
+  try {
+    const jsonData = JSON.stringify(data, null, 2);
+    fs.writeFileSync(jsonPath, jsonData);
+    console.log("localjson updated successfully");
+    return true;
+  } catch (error) {
+    console.error("Error updating beforeload.json:", error);
+    return false;
+  }
+});
 ipcMain.handle("find-master", async () => {
   try {
     const serverData = await findMaster(jsonPath);
@@ -90,8 +102,27 @@ ipcMain.handle("find-master", async () => {
 
 // Utility functions (ensure these are defined in your project)
 async function findMaster(filePath) {
-  // Add the logic to determine the master server
-  return {}; // Replace with actual logic
+  const { server_name } = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+
+  return new Promise((resolve) => {
+    const bonjour = new Bonjour();
+    let found = false;
+
+    bonjour.find({ type: "http" }, (service) => {
+      if (service.name.toLowerCase() === server_name.toLowerCase()) {
+        found = true;
+        resolve(service);
+        bonjour.destroy();
+      }
+    });
+
+    setTimeout(() => {
+      if (!found) {
+        resolve(null);
+        bonjour.destroy();
+      }
+    }, 5000);
+  });
 }
 
 async function readJSONFileFromData(filePath) {

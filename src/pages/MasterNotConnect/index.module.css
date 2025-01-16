@@ -1,0 +1,61 @@
+.mainDiv {
+    /* height: calc(100% - 53px); */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(240, 240, 240);
+    /* justify-content: center; */
+}
+
+.subDiv {
+    margin-top: 5%;
+    background-color: white;
+    width: 60%;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.title {
+    padding: 15px;
+    font-size: large;
+    font-weight: 600;
+}
+
+.hr {
+    width: 100%;
+    margin: 0;
+}
+
+.body {
+    padding: 15px;
+    display: flex;
+    gap: 20px;
+}
+
+.saveBtn {
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #3b80ee;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.saveBtn:hover {
+    transform: scale(1.03);
+    box-shadow: rgba(85, 85, 85, 0.25) 0px 6px 12px -2px,
+        rgba(43, 43, 43, 0.3) 0px 3px 7px -3px;
+}
+
+.mainDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    border-radius: 7px;
+}

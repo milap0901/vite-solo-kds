@@ -2,11 +2,7 @@ import axios from "axios";
 
 export const checkMasterConnection = async (navigate) => {
   try {
-    const { ip_address } = await window.apiKey.request("getBeforeloadData");
-
-    if (ip_address === "localhost") {
-      return ip_address;
-    }
+    const { ip_address } = await window.apiKey.request("getLocalJsonData");
 
     try {
       await axios.get(`http://${ip_address}:3001/ping`, {

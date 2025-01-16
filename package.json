@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "homepage": "./",
-  "main": "dist/electron.js",
+  "main": "public/electron.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

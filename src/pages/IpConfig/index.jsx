@@ -1,8 +1,29 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 import styles from "./index.module.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const IpConfig = () => {
+  const navigate = useNavigate();
+  const [text, setText] = React.useState("");
+
+  const handleIpSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.get(`http://${text}:3001/ping`);
+
+      await window.apiKey.request("update-localjson-data", {
+        ip_address: text,
+        server_name: data.data.serverName,
+      });
+      console.log("Local json updated successfully");
+      navigate("/");
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <div className={styles.congfigBody}>
       <section className={styles.configContainer}>
@@ -33,7 +54,10 @@ const IpConfig = () => {
                 /> */}
               </div>
               <div>
-                <form className={styles.syncCodeControl}>
+                <form
+                  className={styles.syncCodeControl}
+                  onSubmit={handleIpSubmit}
+                >
                   <div className={styles.inputContainer}>
                     <label>Ip Address</label>
                     <input
@@ -42,7 +66,7 @@ const IpConfig = () => {
                       name="IPAddress"
                       autoFocus
                       placeholder="Enter ip address"
-                      //   onChange={handleChange}
+                      onChange={(e) => setText(e.target.value)}
                     />
                   </div>
                   <button>Submit</button>

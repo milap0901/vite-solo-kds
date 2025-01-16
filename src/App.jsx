@@ -7,10 +7,12 @@ import IpConfig from "./pages/IpConfig";
 import "./index.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/bootstrap.min.css";
+import MasterNotConnect from "./pages/MasterNotConnect";
 
 const App = () => (
   <HashRouter>
     <Routes>
+      <Route path="master-not-connect" element={<MasterNotConnect />} />
       <Route path="ip-config" element={<IpConfig />} />
       <Route
         path="/"
