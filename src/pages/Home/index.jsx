@@ -18,7 +18,6 @@ function Home() {
       const axiosIntens = await axiosInterceptors(navigate);
 
       const response = await axiosIntens.get("/api/v2/kds/kots/liveKot");
-      console.log("response", response);
       setData(response.data.data);
     } catch (error) {
       console.error("Error fetching live KOT data:", error);

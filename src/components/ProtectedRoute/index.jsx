@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import MainNav from "../MainNav";
 
 const ProtectedRoute = ({ children }) => {
   const [localData, setLocalData] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  console.log(localData);
-  console.log(loading);
 
   useEffect(() => {
     const loadLocalData = async () => {
@@ -34,7 +32,13 @@ const ProtectedRoute = ({ children }) => {
   }
 
   // Render the children if localData is valid
-  return children;
+
+  return (
+    <>
+      <MainNav />
+      <Outlet />
+    </>
+  );
 };
 
 export default ProtectedRoute;

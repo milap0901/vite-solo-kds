@@ -69,6 +69,7 @@ ipcMain.handle("getLocalJsonData", async () => {
     return null;
   }
 });
+
 // Expose the function to the renderer process
 ipcMain.handle("update-localjson-data", (event, data) => {
   try {
@@ -81,6 +82,7 @@ ipcMain.handle("update-localjson-data", (event, data) => {
     return false;
   }
 });
+
 ipcMain.handle("find-master", async () => {
   try {
     const serverData = await findMaster(jsonPath);

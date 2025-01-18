@@ -6,7 +6,8 @@ import dineInIng from "../../assets/icons/dine in-w-01.png";
 import customerInfo from "../../assets/icons/Contact info.png";
 import { v4 as uuidv4 } from "uuid";
 import noteIcon from "../../assets/icons/note.png";
-import axios from "axios";
+import axiosInterceptors from "../../utils/axiosInterceptors";
+import { useNavigate } from "react-router-dom";
 
 function Timer({ startTime }) {
   const [timer, setTimer] = useState();
@@ -61,15 +62,6 @@ const getHeaderTheme = (type) => {
   }
 };
 
-const updateKOT = async (kotData) => {
-  let { data } = await axios.put(
-    "http://localhost:3001/api/v2/kots/liveKot",
-    kotData
-  );
-  console.log("data", data);
-  return data;
-};
-
 const getDisplayName = (name) => {
   return name
     .split("_")
@@ -79,6 +71,7 @@ const getDisplayName = (name) => {
 };
 
 const KOTCard = (data) => {
+  const navigate = useNavigate();
   const KOT = data.KOT;
 
   // Initialize the selectedItems state
@@ -101,21 +94,12 @@ const KOTCard = (data) => {
 
     // API Call
     try {
-      const response = await fetch(
-        "http://localhost:3001/api/v2/kds/itemStatus",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            kotId: KOT.id, // Assuming KOT has an id
-            itemId: item.id, // Assuming item has an id
-            checked,
-          }),
-        }
-      );
-
+      const axiosIntens = await axiosInterceptors(navigate);
+      const response = await axiosIntens.post("/api/v2/kds/itemStatus", {
+        kotId: KOT.id,
+        itemId: item.id,
+        checked,
+      });
       if (!response.ok) {
         throw new Error("Failed to update item status");
       }
@@ -124,6 +108,13 @@ const KOTCard = (data) => {
     } catch (error) {
       console.error("Error updating item status:", error);
     }
+  };
+
+  const updateKOT = async (kotData) => {
+    const axiosIntens = await axiosInterceptors(navigate);
+    let { data } = await axiosIntens.put("api/v2/kots/liveKot", kotData);
+    console.log("data", data);
+    return data;
   };
 
   return (

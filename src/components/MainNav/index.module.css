@@ -12,6 +12,7 @@
     font-size: 22px;
     transition: all 0.15s ease-in-out;
     cursor: pointer !important;
+    height: 30px;
 }
 
 .Link:hover .LinkIcon,

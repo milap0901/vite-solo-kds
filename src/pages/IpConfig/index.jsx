@@ -3,6 +3,8 @@ import { Alert } from "react-bootstrap";
 import styles from "./index.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/icons/logoSolo.png";
+import configImage from "../../assets/icons/ic_DataSync.png";
 
 const IpConfig = () => {
   const navigate = useNavigate();
@@ -28,8 +30,8 @@ const IpConfig = () => {
     <div className={styles.congfigBody}>
       <section className={styles.configContainer}>
         <div className={styles.logoDiv}>
-          {/* <img src={logo} className={styles.logo} /> */}
-          <div>SOLO</div>
+          <img src={logo} className={styles.logo} />
+          <div>SOLO-KDS</div>
         </div>
         <div className={styles.configControlsContainer}>
           <div className={styles.mainDiv}>
@@ -43,7 +45,7 @@ const IpConfig = () => {
             </div>
             <div className="d-flex">
               <div>
-                {/* <img
+                <img
                   style={{
                     height: "250px",
                     width: "300px",
@@ -51,7 +53,7 @@ const IpConfig = () => {
                   }}
                   src={configImage}
                   alt="configImage"
-                /> */}
+                />
               </div>
               <div>
                 <form

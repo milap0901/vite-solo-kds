@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import styles from "./index.module.css";
+import xmark from "../../assets/icons/xmark.svg";
 
 function ConfigSideBar({
   showConfigSideBar,
@@ -19,14 +20,14 @@ function ConfigSideBar({
       placement="start"
     >
       <Offcanvas.Header className={styles.ConfigSideBarHeader}>
-        {/* <div>SOLO KDS</div> */}
+        <div>SOLO KDS</div>
         <div>
-          {/* <FontAwesomeIcon
-            role="button"
+          <img
+            src={xmark}
             style={{ height: "30px", color: "rgb(230, 230, 230)" }}
-            icon={faXmark}
             onClick={handleClose}
-          /> */}
+            alt=""
+          />
         </div>
       </Offcanvas.Header>
     </Offcanvas>
